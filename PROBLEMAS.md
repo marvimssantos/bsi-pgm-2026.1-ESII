@@ -20,4 +20,4 @@ Exemplo de entradas:
 
 ## Revisão com vocabulário técnico
 
-*(Este espaço será preenchido após a Aula 3, quando os termos corretos forem aprendidos)*
+*(Este espaço será preenchido após a Aula 4, quando os termos técnicos corretos forem aprendidos)*

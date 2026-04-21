@@ -8,13 +8,19 @@ Não é necessário usar termos técnicos neste momento.
 
 ## Minha leitura inicial
 
-*(Espaço reservado para o estudante preencher)*
+- O código faz muitas coisas ao mesmo tempo no mesmo lugar, o que deixa difícil de entender.
 
-Exemplo de entradas:
-- "A classe faz muita coisa ao mesmo tempo"
-- "Tem código de e-mail misturado com o cálculo de multa"
-- "O mesmo cálculo aparece duas vezes no código"
-- "As listas de equipamentos estão fora da classe, soltas no arquivo"
+- As listas de equipamentos e empréstimos ficam soltas fora da classe, o que parece desorganizado.
+
+- O sistema mostra mensagem de e-mail usando print, mas não envia e-mail de verdade.
+
+- O cálculo da multa aparece mais de uma vez no código, o que pode dar problema se precisar mudar depois.
+
+- Tem partes do código que misturam lógica do sistema com mensagens na tela, o que deixa tudo confuso.
+
+- Não vi nenhuma validação mais forte dos dados, então o sistema pode aceitar informações erradas.
+
+- Tudo está em um único arquivo, o que dificulta organizar melhor o sistema.
 
 ---
 

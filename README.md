@@ -1,5 +1,5 @@
 # Sistema de Gestão de Empréstimo de Equipamentos — UFRA Paragominas
-Alteração teste do meu projeto
+
 Sistema desenvolvido para controle de empréstimo de equipamentos do campus
 (notebooks, projetores, cabos HDMI) para uso em aulas e eventos institucionais.
 

@@ -10,25 +10,26 @@ De acordo com os requisitos:
 
 A versão atual (arquivo único) não atende esses requisitos.
 
+A decisão foi baseada na análise comparativa dos estilos arquiteturais realizada na Parte 1.
+
 ---
 
 ## Opções consideradas
 
-### 1. Arquivo único
-- Simples, mas desorganizado
-- Difícil manutenção
-- Não atende RNF03 nem RNF04
+A análise foi feita comparando três estilos arquiteturais com base nos requisitos RNF03 e RNF04.
 
-### 2. Arquitetura em camadas
-- Separa responsabilidades
-- Facilita manutenção
-- Permite testes isolados
-- Atende RNF03 e RNF04
+| Critério | Arquivo único | Em camadas | MVC |
+|----------|-------------|------------|-----|
+| Atende RNF03 | Não | Sim | Sim |
+| Atende RNF04 | Não | Sim | Sim |
+| Adequado para CLI | Sim | Sim | Médio |
+| Familiar para iniciantes | Sim | Sim | Não |
 
-### 3. MVC
-- Bem organizado
-- Mais complexo
-- Desnecessário para sistema simples CLI
+### Análise
+
+- **Arquivo único**: simples, porém desorganizado e difícil de manter, não atendendo os requisitos.
+- **Arquitetura em camadas**: separa responsabilidades, facilita manutenção e testes, atendendo os requisitos.
+- **MVC**: bem estruturado, porém mais complexo do que o necessário para este projeto.
 
 ---
 

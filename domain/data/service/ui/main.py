@@ -1,1 +1,0 @@
-# Menu será implementado futuramente

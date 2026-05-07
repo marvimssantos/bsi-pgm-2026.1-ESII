@@ -1,5 +1,5 @@
 # Diagramas e Decomposição
-
+A decomposição abaixo foi baseada na arquitetura definida no ADR-001 e nos princípios discutidos na resenha da Aula 3, como coesão, separação de responsabilidades e ocultamento de informação.
 ---
 
 ## Decomposição em camadas

@@ -1,3 +1,4 @@
+# Emprestimo: representar um empréstimo realizado.
 from dataclasses import dataclass
 from datetime import date
 

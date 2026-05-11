@@ -1,3 +1,5 @@
+# Notificador: enviar notificações do sistema.
+
 class Notificador:
 
     def notificar_emprestimo(self, email, data_devolucao):

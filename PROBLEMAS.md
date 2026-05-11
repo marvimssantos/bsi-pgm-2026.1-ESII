@@ -41,3 +41,5 @@
 - O modelo inicial dificultava testes isolados, contrariando o requisito RNF04.
 
 - A estrutura em arquivo único dificultava futuras modificações, contrariando o requisito RNF03.
+  
+- O arquivo emprestimos.py violava o princípio SRP (Single Responsibility Principle), pois concentrava múltiplas responsabilidades no mesmo módulo.

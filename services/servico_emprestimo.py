@@ -1,3 +1,4 @@
+# ServicoEmprestimo: controlar regras de empréstimo.
 from datetime import date, timedelta
 
 from models.emprestimo import Emprestimo

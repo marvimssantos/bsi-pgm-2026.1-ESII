@@ -1,3 +1,4 @@
+# RepositorioEmprestimo: persistir dados de empréstimos.
 from models.equipamento import Equipamento
 from models.emprestimo import Emprestimo
 

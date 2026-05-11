@@ -1,3 +1,4 @@
+# Equipamento: representar um equipamento do sistema.
 from dataclasses import dataclass
 
 @dataclass

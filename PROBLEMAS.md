@@ -1,9 +1,5 @@
 # Problemas Identificados — Leitura Inicial do Código
 
-Este arquivo é preenchido pelos estudantes na Aula 1 após a leitura do código legado.
-Descreva em linguagem livre tudo que parecer estranho, errado ou difícil de entender.
-Não é necessário usar termos técnicos neste momento.
-
 ---
 
 ## Minha leitura inicial
@@ -26,4 +22,22 @@ Não é necessário usar termos técnicos neste momento.
 
 ## Revisão com vocabulário técnico
 
-*(Este espaço será preenchido após a Aula 4, quando os termos técnicos corretos forem aprendidos)*
+- O sistema apresentava baixa coesão, pois diferentes responsabilidades estavam concentradas no mesmo arquivo.
+
+- Existia alto acoplamento entre as partes do sistema, dificultando modificações e reutilização de código.
+
+- O uso de variáveis globais aumentava a dependência entre componentes.
+
+- A ausência de separação em camadas dificultava a manutenção e evolução do sistema.
+
+- O sistema não aplicava ocultamento de informação, expondo detalhes internos diretamente.
+
+- A lógica de negócio estava misturada com a interface do usuário, violando a separação de responsabilidades.
+
+- O código possuía características de dívida técnica, principalmente relacionadas à organização e escalabilidade.
+
+- A falta de classes específicas dificultava a modelagem adequada das entidades do sistema.
+
+- O modelo inicial dificultava testes isolados, contrariando o requisito RNF04.
+
+- A estrutura em arquivo único dificultava futuras modificações, contrariando o requisito RNF03.

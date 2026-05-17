@@ -1,4 +1,5 @@
 # main: iniciar execução do sistema.
+
 from services.servico_emprestimo import ServicoEmprestimo
 
 servico = ServicoEmprestimo()

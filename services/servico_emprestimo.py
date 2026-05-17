@@ -1,4 +1,5 @@
 # ServicoEmprestimo: controlar regras de empréstimo.
+
 from datetime import date, timedelta
 
 from models.emprestimo import Emprestimo
@@ -56,6 +57,20 @@ class ServicoEmprestimo:
 
         return False
 
+    def calcular_multa(self, emprestimo):
+
+        equipamento = self.repo.buscar_equipamento(
+            emprestimo.equipamento_id
+        )
+
+        dias_atraso = (
+            date.today() - emprestimo.data_devolucao
+        ).days
+
+        return equipamento.calcular_multa(
+            dias_atraso
+        )
+
     def listar_atrasados(self):
 
         atrasados = []
@@ -66,6 +81,11 @@ class ServicoEmprestimo:
                 emprestimo.data_devolucao < date.today()
                 and not emprestimo.devolvido
             ):
+
+                emprestimo.multa = self.calcular_multa(
+                    emprestimo
+                )
+
                 atrasados.append(emprestimo)
 
                 self.notificador.notificar_atraso(

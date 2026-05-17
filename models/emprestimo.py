@@ -1,6 +1,8 @@
 # Emprestimo: representar um empréstimo realizado.
+
 from dataclasses import dataclass
 from datetime import date
+
 
 @dataclass
 class Emprestimo:
@@ -10,3 +12,4 @@ class Emprestimo:
     email: str
     data_devolucao: date
     devolvido: bool
+    multa: float = 0

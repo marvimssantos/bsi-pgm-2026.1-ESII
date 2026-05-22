@@ -15,3 +15,27 @@ A solução desenvolvida aplicou o princípio OCP (Open/Closed Principle) utiliz
 A abordagem funciona bem para variações simples baseadas em tipos de equipamento. Entretanto, conforme discutido por Valente no Capítulo 5, o OCP possui limites práticos. Caso surjam requisitos muito diferentes, como multas por hora, políticas variáveis por dia da semana ou regras dependentes de feriados, a hierarquia atual pode começar a crescer excessivamente e perder flexibilidade.
 
 Nesse cenário, apenas herança talvez não seja suficiente. Seria necessário repensar a decomposição utilizando estratégias mais flexíveis, como composição ou padrões específicos para encapsular políticas de cálculo. Segundo Valente, o uso excessivo de abstrações também pode aumentar a complexidade do sistema, portanto o OCP deve ser aplicado com equilíbrio.
+
+## Aula 06 — Verificação de LSP
+
+As subclasses Notebook e Projetor foram revisadas para verificar se respeitam o contrato definido pela classe base Equipamento. Nos testes realizados, calcular_multa(0) retornou 0 em ambas as subclasses, atendendo corretamente ao requisito de multa não negativa.
+
+Também foi verificado o comportamento com valores negativos, como calcular_multa(-5). Em todos os casos o retorno permaneceu 0, devido ao uso da função max(0, valor), impedindo multas negativas.
+
+Além disso, nenhuma das subclasses lança exceções inesperadas durante a execução do método calcular_multa(). O retorno sempre permanece numérico e compatível com o contrato estabelecido na classe abstrata.
+
+Dessa forma, as subclasses respeitam o comportamento esperado da superclasse, mantendo compatibilidade com o ServicoEmprestimo. Isso confirma a aplicação correta do princípio LSP, pois qualquer subclasse pode substituir Equipamento sem quebrar o funcionamento do sistema.
+
+A análise foi baseada na discussão sobre substituição comportamental apresentada por Valente no Capítulo 5, seção sobre LSP (Liskov Substitution Principle).
+
+---
+
+## Aula 06 — DIP
+
+A aplicação do DIP modificou significativamente a relação de dependência entre os módulos do sistema. Antes da alteração, o ServicoEmprestimo criava internamente suas dependências, tornando-se diretamente responsável por instanciar o repositório e o notificador. Isso aumentava o acoplamento e dificultava testes isolados.
+
+Após a mudança, o serviço passou a receber essas dependências pelo construtor, funcionando apenas como consumidor delas. Na prática, isso alterou não apenas a implementação técnica, mas também a forma como os módulos se relacionam. O ServicoEmprestimo deixou de controlar a criação das dependências e passou a depender apenas de comportamentos externos já fornecidos.
+
+Segundo Valente no Capítulo 5, seção sobre DIP (Dependency Inversion Principle), a inversão de dependência reduz acoplamento e aumenta flexibilidade arquitetural, permitindo substituições mais simples entre implementações. Isso ficou evidente ao imaginar o uso de repositórios falsos e notificadores falsos para testes, sem necessidade de alterar o serviço principal.
+
+Além da melhoria arquitetural, a aplicação do DIP preparou o projeto para os testes unitários que serão desenvolvidos nas próximas aulas.

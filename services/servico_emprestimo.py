@@ -3,19 +3,30 @@
 from datetime import date, timedelta
 
 from models.emprestimo import Emprestimo
-from repositories.repositorio_emprestimo import RepositorioEmprestimo
-from services.notificador import Notificador
 
 
 class ServicoEmprestimo:
 
-    def __init__(self):
-        self.repo = RepositorioEmprestimo()
-        self.notificador = Notificador()
+    def __init__(
+        self,
+        repositorio,
+        notificador
+    ):
 
-    def registrar(self, equip_id, nome, email, dias):
+        self.repo = repositorio
+        self.notificador = notificador
 
-        equipamento = self.repo.buscar_equipamento(equip_id)
+    def registrar(
+        self,
+        equip_id,
+        nome,
+        email,
+        dias
+    ):
+
+        equipamento = self.repo.buscar_equipamento(
+            equip_id
+        )
 
         if equipamento is None:
             return False
@@ -23,7 +34,9 @@ class ServicoEmprestimo:
         if not equipamento.disponivel:
             return False
 
-        devolucao = date.today() + timedelta(days=dias)
+        devolucao = (
+            date.today() + timedelta(days=dias)
+        )
 
         emprestimo = Emprestimo(
             id=len(self.repo.emprestimos) + 1,
@@ -34,16 +47,26 @@ class ServicoEmprestimo:
             devolvido=False
         )
 
-        self.repo.salvar_emprestimo(emprestimo)
-        self.repo.marcar_indisponivel(equip_id)
+        self.repo.salvar_emprestimo(
+            emprestimo
+        )
 
-        self.notificador.notificar_emprestimo(email, devolucao)
+        self.repo.marcar_indisponivel(
+            equip_id
+        )
+
+        self.notificador.notificar_emprestimo(
+            email,
+            devolucao
+        )
 
         return True
 
     def registrar_devolucao(self, id):
 
-        for emprestimo in self.repo.buscar_emprestimos():
+        for emprestimo in (
+            self.repo.buscar_emprestimos()
+        ):
 
             if emprestimo.id == id:
 
@@ -59,12 +82,15 @@ class ServicoEmprestimo:
 
     def calcular_multa(self, emprestimo):
 
-        equipamento = self.repo.buscar_equipamento(
-            emprestimo.equipamento_id
+        equipamento = (
+            self.repo.buscar_equipamento(
+                emprestimo.equipamento_id
+            )
         )
 
         dias_atraso = (
-            date.today() - emprestimo.data_devolucao
+            date.today()
+            - emprestimo.data_devolucao
         ).days
 
         return equipamento.calcular_multa(
@@ -75,15 +101,20 @@ class ServicoEmprestimo:
 
         atrasados = []
 
-        for emprestimo in self.repo.buscar_emprestimos():
+        for emprestimo in (
+            self.repo.buscar_emprestimos()
+        ):
 
             if (
-                emprestimo.data_devolucao < date.today()
+                emprestimo.data_devolucao
+                < date.today()
                 and not emprestimo.devolvido
             ):
 
-                emprestimo.multa = self.calcular_multa(
-                    emprestimo
+                emprestimo.multa = (
+                    self.calcular_multa(
+                        emprestimo
+                    )
                 )
 
                 atrasados.append(emprestimo)

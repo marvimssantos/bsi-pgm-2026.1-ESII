@@ -39,3 +39,15 @@ Após a mudança, o serviço passou a receber essas dependências pelo construto
 Segundo Valente no Capítulo 5, seção sobre DIP (Dependency Inversion Principle), a inversão de dependência reduz acoplamento e aumenta flexibilidade arquitetural, permitindo substituições mais simples entre implementações. Isso ficou evidente ao imaginar o uso de repositórios falsos e notificadores falsos para testes, sem necessidade de alterar o serviço principal.
 
 Além da melhoria arquitetural, a aplicação do DIP preparou o projeto para os testes unitários que serão desenvolvidos nas próximas aulas.
+
+## Aula 08 — Testes Automatizados e CI
+
+Durante a Aula 08 foi possível perceber como os testes automatizados ajudam a validar o comportamento do sistema sem depender de verificações manuais. A utilização do pytest tornou os testes mais organizados e facilitou a execução de múltiplos cenários rapidamente.
+
+A aplicação do DIP realizada anteriormente facilitou bastante os testes, pois o ServicoEmprestimo já recebia suas dependências pelo construtor. Isso permitiu utilizar fakes no lugar de componentes reais, reduzindo acoplamento e tornando os testes mais isolados.
+
+Os dublês de teste também mostraram na prática a importância da separação de responsabilidades. O FakeRepositorio e o FakeNotificador permitiram testar regras de negócio sem depender de banco de dados ou envio real de e-mails.
+
+Outro ponto importante foi a utilização do GitHub Actions para integração contínua. Com isso, os testes passaram a ser executados automaticamente a cada push, ajudando a identificar erros rapidamente e aumentando a confiabilidade do projeto.
+
+De acordo com Valente, Cap. 5, seção sobre modularidade e dependências, reduzir acoplamento entre componentes facilita manutenção, evolução e testes do sistema. Isso ficou evidente durante a implementação dos testes automatizados.

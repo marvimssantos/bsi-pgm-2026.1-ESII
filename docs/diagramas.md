@@ -98,3 +98,88 @@ sequenceDiagram
 
     servico-->>main: lista de atrasados
 ```
+---
+
+## Diagrama de Classes — v2.0
+
+```mermaid
+classDiagram
+
+class IRepositorioEmprestimo {
+    <<interface>>
+    +buscar_equipamento()
+    +salvar_emprestimo()
+    +buscar_emprestimos()
+    +marcar_indisponivel()
+    +marcar_disponivel()
+}
+
+class INotificador {
+    <<interface>>
+    +notificar_emprestimo()
+    +notificar_atraso()
+}
+
+class RepositorioEmprestimo {
+    +equipamentos
+    +emprestimos
+    +buscar_equipamento()
+    +salvar_emprestimo()
+    +buscar_emprestimos()
+    +marcar_indisponivel()
+    +marcar_disponivel()
+}
+
+class Notificador {
+    +notificar_emprestimo()
+    +notificar_atraso()
+    -enviar_email()
+}
+
+class ServicoEmprestimo {
+    -repo
+    -notificador
+    +registrar()
+    +registrar_devolucao()
+    +calcular_multa()
+    +listar_atrasados()
+}
+
+class Equipamento {
+    <<abstract>>
+    +id
+    +nome
+    +disponivel
+    +calcular_multa()
+}
+
+class Notebook {
+    +calcular_multa()
+}
+
+class Projetor {
+    +calcular_multa()
+}
+
+class Emprestimo {
+    +id
+    +equipamento_id
+    +nome_usuario
+    +email
+    +data_devolucao
+    +devolvido
+    +multa
+}
+
+RepositorioEmprestimo ..|> IRepositorioEmprestimo
+Notificador ..|> INotificador
+
+ServicoEmprestimo --> IRepositorioEmprestimo
+ServicoEmprestimo --> INotificador
+
+Notebook --|> Equipamento
+Projetor --|> Equipamento
+
+RepositorioEmprestimo o-- Emprestimo
+RepositorioEmprestimo o-- Equipamento
+```

@@ -40,14 +40,10 @@ Segundo Valente no Capítulo 5, seção sobre DIP (Dependency Inversion Principl
 
 Além da melhoria arquitetural, a aplicação do DIP preparou o projeto para os testes unitários que serão desenvolvidos nas próximas aulas.
 
-## Aula 08 — Testes Automatizados e CI
+## Aula 08 — Testes
 
-Durante a Aula 08 foi possível perceber como os testes automatizados ajudam a validar o comportamento do sistema sem depender de verificações manuais. A utilização do pytest tornou os testes mais organizados e facilitou a execução de múltiplos cenários rapidamente.
+Durante esta atividade foram implementados testes unitários e de integração utilizando o framework pytest. Os testes unitários permitiram validar comportamentos específicos do sistema de forma isolada, utilizando dublês de teste para substituir dependências externas. O FakeRepositorio foi utilizado como um Fake, simulando o armazenamento de dados em memória, enquanto o FakeNotificador atuou como um Spy, registrando as notificações realizadas para posterior verificação nos testes.
 
-A aplicação do DIP realizada anteriormente facilitou bastante os testes, pois o ServicoEmprestimo já recebia suas dependências pelo construtor. Isso permitiu utilizar fakes no lugar de componentes reais, reduzindo acoplamento e tornando os testes mais isolados.
+Além dos testes unitários, foi desenvolvido um teste de integração para verificar a comunicação entre os principais componentes do sistema. Enquanto os testes unitários facilitam a identificação de falhas específicas e executam mais rapidamente, os testes de integração permitem validar a colaboração entre múltiplos componentes, identificando problemas que não seriam percebidos em testes isolados.
 
-Os dublês de teste também mostraram na prática a importância da separação de responsabilidades. O FakeRepositorio e o FakeNotificador permitiram testar regras de negócio sem depender de banco de dados ou envio real de e-mails.
-
-Outro ponto importante foi a utilização do GitHub Actions para integração contínua. Com isso, os testes passaram a ser executados automaticamente a cada push, ajudando a identificar erros rapidamente e aumentando a confiabilidade do projeto.
-
-De acordo com Valente, Cap. 5, seção sobre modularidade e dependências, reduzir acoplamento entre componentes facilita manutenção, evolução e testes do sistema. Isso ficou evidente durante a implementação dos testes automatizados.
+Também foi configurado o GitHub Actions para executar automaticamente os testes a cada atualização do repositório, garantindo maior confiabilidade ao processo de desenvolvimento. Conforme discutido por Valente no Capítulo 8, testes unitários e de integração possuem objetivos diferentes e complementares, contribuindo conjuntamente para a qualidade do software.

@@ -1,5 +1,8 @@
 # ADR-001 — Decisão de Arquitetura
 
+**Status:** Accepted  
+**Data:** 2026-04-22
+
 ## Contexto
 
 O sistema atual apresenta problemas de organização, dificultando manutenção e testes. 

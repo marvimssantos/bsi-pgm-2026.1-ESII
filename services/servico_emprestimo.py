@@ -3,14 +3,16 @@
 from datetime import date, timedelta
 
 from models.emprestimo import Emprestimo
+from repositories.interfaces import IRepositorioEmprestimo
+from services.interfaces import INotificador
 
 
 class ServicoEmprestimo:
 
     def __init__(
         self,
-        repositorio,
-        notificador
+        repositorio: IRepositorioEmprestimo,
+        notificador: INotificador
     ):
 
         self.repo = repositorio

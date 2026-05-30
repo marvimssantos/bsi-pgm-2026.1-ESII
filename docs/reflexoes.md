@@ -51,3 +51,13 @@ Os dublês de teste também mostraram na prática a importância da separação 
 Outro ponto importante foi a utilização do GitHub Actions para integração contínua. Com isso, os testes passaram a ser executados automaticamente a cada push, ajudando a identificar erros rapidamente e aumentando a confiabilidade do projeto.
 
 De acordo com Valente, Cap. 5, seção sobre modularidade e dependências, reduzir acoplamento entre componentes facilita manutenção, evolução e testes do sistema. Isso ficou evidente durante a implementação dos testes automatizados.
+=======
+## Aula 08 — Testes
+
+Os testes de unidade permitiram validar partes específicas do sistema de forma isolada, utilizando dublês de teste para substituir dependências externas. Isso tornou os testes mais rápidos e facilitou a identificação de erros em métodos específicos, como cálculo de multas e validação de equipamentos disponíveis.
+
+Já o teste de integração teve o objetivo de verificar se os componentes colaboram corretamente entre si. Enquanto os testes de unidade validam comportamentos isolados, o teste de integração consegue detectar problemas na comunicação entre serviço, repositório e notificador, algo que não seria percebido ao testar cada componente separadamente.
+
+Por outro lado, o teste de integração não é tão eficiente para localizar a origem exata de uma falha quanto um teste de unidade. Quando ocorre um erro, pode ser necessário investigar vários componentes até encontrar sua causa. Dessa forma, testes de unidade e integração são complementares e contribuem para aumentar a confiabilidade do software.
+
+Segundo Valente (Cap. 8 — Testes), diferentes níveis de teste possuem objetivos distintos e devem ser utilizados em conjunto para proporcionar maior qualidade ao sistema.

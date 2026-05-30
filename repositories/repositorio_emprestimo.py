@@ -1,10 +1,11 @@
 # RepositorioEmprestimo: persistir dados de empréstimos.
 
+from repositories.interfaces import IRepositorioEmprestimo
 from models.equipamento import Notebook, Projetor
 from models.emprestimo import Emprestimo
 
 
-class RepositorioEmprestimo:
+class RepositorioEmprestimo(IRepositorioEmprestimo):
 
     def __init__(self):
 

@@ -1,6 +1,6 @@
-# Cenário BDD — Cálculo de Multa com Carência
+# Cenário BDD — Multa com Carência em Empréstimos
 
-Funcionalidade: Cálculo de multa
+Funcionalidade: Multa com carência em empréstimos
 
 Cenário: Usuário devolve equipamento após o período de carência
 

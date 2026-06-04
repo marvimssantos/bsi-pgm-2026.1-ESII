@@ -5,6 +5,7 @@ from datetime import date, timedelta
 from models.emprestimo import Emprestimo
 from repositories.interfaces import IRepositorioEmprestimo
 from services.interfaces import INotificador
+from multa import calcular_multa_com_carencia
 
 
 class ServicoEmprestimo:
@@ -84,19 +85,15 @@ class ServicoEmprestimo:
 
     def calcular_multa(self, emprestimo):
 
-        equipamento = (
-            self.repo.buscar_equipamento(
-                emprestimo.equipamento_id
-            )
-        )
-
         dias_atraso = (
             date.today()
             - emprestimo.data_devolucao
         ).days
 
-        return equipamento.calcular_multa(
-            dias_atraso
+        return calcular_multa_com_carencia(
+            dias_atraso=dias_atraso,
+            carencia=3,
+            valor_por_dia=10
         )
 
     def listar_atrasados(self):

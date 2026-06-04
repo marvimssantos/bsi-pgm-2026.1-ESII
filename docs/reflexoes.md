@@ -48,10 +48,12 @@ Além dos testes unitários, foi desenvolvido um teste de integração para veri
 
 Também foi configurado o GitHub Actions para executar automaticamente os testes a cada atualização do repositório, garantindo maior confiabilidade ao processo de desenvolvimento. Conforme discutido por Valente no Capítulo 8, testes unitários e de integração possuem objetivos diferentes e complementares, contribuindo conjuntamente para a qualidade do software.
 
-## Aula 09 — TDD
+## Aula 09 — TDD e BDD
 
-A atividade permitiu aplicar o ciclo Red-Green-Refactor na prática. Inicialmente foi criado um teste que falhava (Red), em seguida foi implementada a solução mínima para fazê-lo passar (Green) e por fim o código foi reorganizado mantendo todos os testes aprovados (Refactor).
+A atividade permitiu aplicar na prática o ciclo Red-Green-Refactor do TDD. Inicialmente foi criado um teste que falhava (Red), depois foi implementada a solução mínima necessária para fazê-lo passar (Green) e, por fim, o código foi reorganizado sem alterar seu comportamento (Refactor). Esse processo trouxe mais segurança para realizar mudanças, já que os testes indicam rapidamente quando alguma funcionalidade é afetada.
 
-A principal vantagem observada foi a segurança para realizar alterações, pois a suíte de testes indica rapidamente quando alguma modificação quebra um comportamento esperado. Além disso, os testes servem como documentação executável dos requisitos implementados.
+Além do TDD, também foi utilizado BDD para descrever comportamentos do sistema por meio de cenários no formato Given-When-Then. Enquanto o TDD tem foco na implementação e validação técnica do código, o BDD enfatiza a descrição dos requisitos de forma mais próxima da linguagem de negócio.
 
-O desenvolvimento orientado por testes também incentivou a criação de código mais simples e focado nos requisitos necessários para cada ciclo, evitando implementações excessivas antes da validação do comportamento esperado.
+Na minha avaliação, as duas abordagens são complementares. O TDD contribui para a qualidade interna do software e para a detecção precoce de erros, enquanto o BDD facilita a comunicação dos requisitos e a compreensão do comportamento esperado. Para este projeto, o TDD foi mais importante durante a implementação da funcionalidade de multa com carência, mas o BDD ajudou a documentar claramente as regras implementadas.
+
+Dessa forma, o principal trade-off observado é que o TDD oferece maior precisão técnica, enquanto o BDD proporciona maior clareza na comunicação dos requisitos. A utilização conjunta das duas abordagens contribuiu para aumentar a qualidade e a compreensão do sistema.

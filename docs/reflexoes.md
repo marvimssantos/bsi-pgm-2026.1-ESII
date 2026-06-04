@@ -47,3 +47,11 @@ Durante esta atividade foram implementados testes unitários e de integração u
 Além dos testes unitários, foi desenvolvido um teste de integração para verificar a comunicação entre os principais componentes do sistema. Enquanto os testes unitários facilitam a identificação de falhas específicas e executam mais rapidamente, os testes de integração permitem validar a colaboração entre múltiplos componentes, identificando problemas que não seriam percebidos em testes isolados.
 
 Também foi configurado o GitHub Actions para executar automaticamente os testes a cada atualização do repositório, garantindo maior confiabilidade ao processo de desenvolvimento. Conforme discutido por Valente no Capítulo 8, testes unitários e de integração possuem objetivos diferentes e complementares, contribuindo conjuntamente para a qualidade do software.
+
+## Aula 09 — TDD
+
+A atividade permitiu aplicar o ciclo Red-Green-Refactor na prática. Inicialmente foi criado um teste que falhava (Red), em seguida foi implementada a solução mínima para fazê-lo passar (Green) e por fim o código foi reorganizado mantendo todos os testes aprovados (Refactor).
+
+A principal vantagem observada foi a segurança para realizar alterações, pois a suíte de testes indica rapidamente quando alguma modificação quebra um comportamento esperado. Além disso, os testes servem como documentação executável dos requisitos implementados.
+
+O desenvolvimento orientado por testes também incentivou a criação de código mais simples e focado nos requisitos necessários para cada ciclo, evitando implementações excessivas antes da validação do comportamento esperado.

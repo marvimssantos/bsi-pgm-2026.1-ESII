@@ -1,7 +1,13 @@
 import pytest
 
+from datetime import date, timedelta
+
 from services.servico_emprestimo import (
     ServicoEmprestimo
+)
+
+from models.emprestimo import (
+    Emprestimo
 )
 
 from tests.fakes.fake_repositorio import (
@@ -15,33 +21,27 @@ from tests.fakes.fake_notificador import (
 
 def test_servico_recebe_repo_fake():
 
-    # Arrange
     repo = FakeRepositorio()
 
-    # Act
     servico = ServicoEmprestimo(
         repo,
         None
     )
 
-    # Assert
     assert servico.repo == repo
 
 
 def test_servico_recebe_notificador_fake():
 
-    # Arrange
     repo = FakeRepositorio()
 
     notificador = FakeNotificador()
 
-    # Act
     servico = ServicoEmprestimo(
         repo,
         notificador
     )
 
-    # Assert
     assert (
         servico.notificador
         ==
@@ -51,7 +51,6 @@ def test_servico_recebe_notificador_fake():
 
 def test_salvar_emprestimo():
 
-    # Arrange
     repo = FakeRepositorio()
 
     notificador = FakeNotificador()
@@ -66,12 +65,10 @@ def test_salvar_emprestimo():
         "usuario": "Marcos"
     }
 
-    # Act
     repo.salvar_emprestimo(
         emprestimo
     )
 
-    # Assert
     assert len(
         repo.emprestimos
     ) == 1
@@ -89,15 +86,12 @@ def test_busca_parametrizada(
     resultado_esperado
 ):
 
-    # Arrange
     repo = FakeRepositorio()
 
-    # Act
     equipamento = repo.buscar_equipamento(
         equipamento_id
     )
 
-    # Assert
     assert (
         (equipamento is not None)
         ==
@@ -107,16 +101,40 @@ def test_busca_parametrizada(
 
 def test_equipamento_indisponivel():
 
-    # Arrange
     repo = FakeRepositorio()
 
-    # Act
     equipamento = repo.buscar_equipamento(
         2
     )
 
-    # Assert
     assert (
         equipamento["disponivel"]
         is False
     )
+
+
+def test_calcular_multa_do_servico_aplica_carencia():
+
+    repo = FakeRepositorio()
+
+    notificador = FakeNotificador()
+
+    servico = ServicoEmprestimo(
+        repo,
+        notificador
+    )
+
+    emprestimo = Emprestimo(
+        id=1,
+        equipamento_id=1,
+        nome_usuario="Marcos",
+        email="marcos@email.com",
+        data_devolucao=date.today() - timedelta(days=5),
+        devolvido=False
+    )
+
+    multa = servico.calcular_multa(
+        emprestimo
+    )
+
+    assert multa == 20

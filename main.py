@@ -1,56 +1,51 @@
-# main: iniciar execução do sistema.
-
-from repositories.repositorio_emprestimo import (
-    RepositorioEmprestimo
-)
-
-from services.notificador import (
-    Notificador
-)
-
-from services.servico_emprestimo import (
-    ServicoEmprestimo
+from app.sistema import (
+    SistemaDeEmprestimos
 )
 
 
 def main():
 
-    repositorio = (
-        RepositorioEmprestimo()
-    )
-
-    notificador = (
-        Notificador()
-    )
-
-    servico = ServicoEmprestimo(
-        repositorio,
-        notificador
+    sistema = (
+        SistemaDeEmprestimos()
     )
 
     while True:
 
         print(
-            "\n1-Registrar  "
-            "2-Devolver  "
-            "3-Atrasados  "
-            "0-Sair"
+            "\n1-Registrar  2-Devolver  3-Atrasados  0-Sair"
         )
 
-        opcao = input("Opção: ")
+        opcao = input(
+            "Opção: "
+        )
 
         if opcao == "1":
 
-            servico.registrar(
-                int(input("ID equipamento: ")),
-                input("Nome: "),
-                input("Email: "),
-                int(input("Dias: "))
+            sistema.registrar(
+                int(
+                    input(
+                        "ID equipamento: "
+                    )
+                ),
+
+                input(
+                    "Nome: "
+                ),
+
+                input(
+                    "Email: "
+                ),
+
+                int(
+                    input(
+                        "Dias: "
+                    )
+                )
             )
 
         elif opcao == "2":
 
-            servico.registrar_devolucao(
+            sistema.devolver(
                 int(
                     input(
                         "ID empréstimo: "
@@ -60,11 +55,13 @@ def main():
 
         elif opcao == "3":
 
-            servico.listar_atrasados()
+            sistema.listar_atrasados()
 
         elif opcao == "0":
+
             break
 
 
 if __name__ == "__main__":
+
     main()

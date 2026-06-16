@@ -1,29 +1,73 @@
 # Equipamento: representar equipamentos do sistema.
 
-from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from abc import (
+    ABC,
+    abstractmethod
+)
+
+from dataclasses import (
+    dataclass
+)
 
 
 @dataclass
 class Equipamento(ABC):
+
     id: int
     nome: str
-    disponivel: bool
+    disponivel: bool = True
 
     @abstractmethod
-    def calcular_multa(self, dias_atraso):
+    def calcular_multa(
+        self,
+        dias_atraso
+    ):
         pass
 
 
 @dataclass
-class Notebook(Equipamento):
+class Notebook(
+    Equipamento
+):
 
-    def calcular_multa(self, dias_atraso):
-        return max(0, dias_atraso * 10)
+    def calcular_multa(
+        self,
+        dias_atraso
+    ):
+
+        return max(
+            0,
+            dias_atraso * 10
+        )
 
 
 @dataclass
-class Projetor(Equipamento):
+class Projetor(
+    Equipamento
+):
 
-    def calcular_multa(self, dias_atraso):
-        return max(0, dias_atraso * 5)
+    def calcular_multa(
+        self,
+        dias_atraso
+    ):
+
+        return max(
+            0,
+            dias_atraso * 5
+        )
+
+
+@dataclass
+class Cabo(
+    Equipamento
+):
+
+    def calcular_multa(
+        self,
+        dias_atraso
+    ):
+
+        return max(
+            0,
+            dias_atraso * 2
+        )

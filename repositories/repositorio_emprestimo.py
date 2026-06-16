@@ -1,46 +1,111 @@
-# RepositorioEmprestimo: persistir dados de empréstimos.
+from models.fabrica_equipamento import (
+    FabricaEquipamento
+)
 
-from repositories.interfaces import IRepositorioEmprestimo
-from models.equipamento import Notebook, Projetor
-from models.emprestimo import Emprestimo
+from repositories.interfaces import (
+    IRepositorioEmprestimo
+)
 
 
-class RepositorioEmprestimo(IRepositorioEmprestimo):
+class RepositorioEmprestimo(
+    IRepositorioEmprestimo
+):
 
     def __init__(self):
 
-        self.equipamentos = [
-            Notebook(1, "Notebook", True),
-            Projetor(2, "Projetor", True)
+        criar = (
+            FabricaEquipamento.criar
+        )
+
+        self._equipamentos = [
+
+            criar(
+                "notebook",
+                1,
+                "Notebook Dell"
+            ),
+
+            criar(
+                "projetor",
+                2,
+                "Projetor Epson"
+            ),
+
+            criar(
+                "cabo",
+                3,
+                "Cabo HDMI"
+            )
         ]
 
-        self.emprestimos = []
+        self._emprestimos = []
 
-    def buscar_equipamento(self, equip_id):
+    @property
+    def emprestimos(
+        self
+    ):
 
-        for equipamento in self.equipamentos:
+        return (
+            self._emprestimos
+        )
 
-            if equipamento.id == equip_id:
-                return equipamento
+    def buscar_equipamento(
+        self,
+        id
+    ):
+
+        for e in (
+            self._equipamentos
+        ):
+
+            if e.id == id:
+                return e
 
         return None
 
-    def salvar_emprestimo(self, emprestimo):
-        self.emprestimos.append(emprestimo)
+    def buscar_emprestimos(
+        self
+    ):
 
-    def buscar_emprestimos(self):
-        return self.emprestimos
+        return (
+            self._emprestimos
+        )
 
-    def marcar_indisponivel(self, equip_id):
+    def salvar_emprestimo(
+        self,
+        emprestimo
+    ):
 
-        equipamento = self.buscar_equipamento(equip_id)
+        self._emprestimos.append(
+            emprestimo
+        )
+
+    def marcar_indisponivel(
+        self,
+        id
+    ):
+
+        equipamento = (
+            self.buscar_equipamento(
+                id
+            )
+        )
 
         if equipamento:
+
             equipamento.disponivel = False
 
-    def marcar_disponivel(self, equip_id):
+    def marcar_disponivel(
+        self,
+        id
+    ):
 
-        equipamento = self.buscar_equipamento(equip_id)
+        equipamento = (
+            self.buscar_equipamento(
+                id
+            )
+        )
 
         if equipamento:
+
             equipamento.disponivel = True

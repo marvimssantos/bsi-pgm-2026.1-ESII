@@ -57,3 +57,13 @@ Além do TDD, também foi utilizado BDD para descrever comportamentos do sistema
 Na minha avaliação, as duas abordagens são complementares. O TDD contribui para a qualidade interna do software e para a detecção precoce de erros, enquanto o BDD facilita a comunicação dos requisitos e a compreensão do comportamento esperado. Para este projeto, o TDD foi mais importante durante a implementação da funcionalidade de multa com carência, mas o BDD ajudou a documentar claramente as regras implementadas.
 
 Dessa forma, o principal trade-off observado é que o TDD oferece maior precisão técnica, enquanto o BDD proporciona maior clareza na comunicação dos requisitos. A utilização conjunta das duas abordagens contribuiu para aumentar a qualidade e a compreensão do sistema.
+
+## Aula 10 — Factory e Facade
+
+Durante a Aula 10 foi possível aplicar dois padrões de projeto em um sistema que já estava funcionando e protegido por testes automatizados. Diferente da Aula 09, o objetivo não foi criar comportamento novo, mas reorganizar responsabilidades sem alterar o funcionamento observado.
+
+Na aplicação da Factory surgiu uma situação que inicialmente parece contrariar o OCP, pois a fábrica ainda centraliza a decisão de qual classe concreta instanciar com base no tipo do equipamento. Entretanto, essa concentração foi proposital: em vez de espalhar decisões de criação por vários pontos do sistema, elas ficaram isoladas em um único local. Com isso, mudanças futuras relacionadas à criação dos objetos afetam apenas a fábrica, enquanto repositório e serviços permanecem estáveis. O acoplamento continua existindo, mas foi concentrado.
+
+Já na Facade, a extração da classe SistemaDeEmprestimos não desfez o DIP aplicado anteriormente. O serviço continua recebendo dependências por injeção, enquanto a fachada passou a atuar apenas como raiz de composição do sistema, concentrando a montagem dos objetos. Os testes também permaneceram válidos porque continuam exercitando diretamente o ServicoEmprestimo com dublês, sem depender da fachada.
+
+Conforme discutido por Valente no Capítulo 6, padrões de projeto ajudam a controlar acoplamento e organizar responsabilidades quando usados para simplificar a arquitetura.

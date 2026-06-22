@@ -67,3 +67,13 @@ Na aplicação da Factory surgiu uma situação que inicialmente parece contrari
 Já na Facade, a extração da classe SistemaDeEmprestimos não desfez o DIP aplicado anteriormente. O serviço continua recebendo dependências por injeção, enquanto a fachada passou a atuar apenas como raiz de composição do sistema, concentrando a montagem dos objetos. Os testes também permaneceram válidos porque continuam exercitando diretamente o ServicoEmprestimo com dublês, sem depender da fachada.
 
 Conforme discutido por Valente no Capítulo 6, padrões de projeto ajudam a controlar acoplamento e organizar responsabilidades quando usados para simplificar a arquitetura.
+
+## Aula 11 — Strategy e Observer
+
+Nesta atividade foi realizada a aplicação dos padrões de projeto Strategy e Observer com o objetivo de melhorar a organização e a flexibilidade do sistema. O padrão Strategy foi utilizado para separar o algoritmo de cálculo de multa da estrutura dos equipamentos, permitindo alterar regras de cálculo sem modificar as classes principais. Isso reduziu acoplamento e facilitou futuras extensões.
+
+Já o padrão Observer foi utilizado para desacoplar o envio de notificações do fluxo principal do sistema. Em vez de depender diretamente de uma única implementação, o serviço passou a permitir múltiplos observadores, tornando mais simples adicionar novos comportamentos sem alterar a lógica central.
+
+Comparando com as aulas anteriores, foi possível perceber que refatorações orientadas por padrões aumentam reutilização e manutenção do código. Além disso, os testes automatizados deram segurança para modificar estruturas internas sem alterar o comportamento esperado do sistema.
+
+A principal lição observada foi que padrões de projeto devem ser aplicados para resolver problemas reais de organização e evolução do código, e não apenas para aumentar complexidade.

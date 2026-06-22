@@ -2,11 +2,19 @@ from app.sistema import (
     SistemaDeEmprestimos
 )
 
+from services.observer import (
+    NotificadorEmail
+)
+
 
 def main():
 
     sistema = (
         SistemaDeEmprestimos()
+    )
+
+    sistema._servico.adicionar_observer(
+        NotificadorEmail()
     )
 
     while True:

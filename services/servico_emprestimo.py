@@ -3,9 +3,15 @@
 from datetime import date, timedelta
 
 from models.emprestimo import Emprestimo
-from repositories.interfaces import IRepositorioEmprestimo
-from services.interfaces import INotificador
-from multa import calcular_multa_com_carencia
+from repositories.interfaces import (
+    IRepositorioEmprestimo
+)
+from services.interfaces import (
+    INotificador
+)
+from multa import (
+    calcular_multa_com_carencia
+)
 
 
 class ServicoEmprestimo:
@@ -18,6 +24,29 @@ class ServicoEmprestimo:
 
         self.repo = repositorio
         self.notificador = notificador
+        self.observers = []
+
+    def adicionar_observer(
+        self,
+        observer
+    ):
+
+        self.observers.append(
+            observer
+        )
+
+    def notificar(
+        self,
+        email,
+        mensagem
+    ):
+
+        for observer in self.observers:
+
+            observer.atualizar(
+                email,
+                mensagem
+            )
 
     def registrar(
         self,
@@ -27,8 +56,10 @@ class ServicoEmprestimo:
         dias
     ):
 
-        equipamento = self.repo.buscar_equipamento(
-            equip_id
+        equipamento = (
+            self.repo.buscar_equipamento(
+                equip_id
+            )
         )
 
         if equipamento is None:
@@ -38,11 +69,16 @@ class ServicoEmprestimo:
             return False
 
         devolucao = (
-            date.today() + timedelta(days=dias)
+            date.today()
+            + timedelta(days=dias)
         )
 
         emprestimo = Emprestimo(
-            id=len(self.repo.emprestimos) + 1,
+            id=(
+                len(
+                    self.repo.emprestimos
+                ) + 1
+            ),
             equipamento_id=equip_id,
             nome_usuario=nome,
             email=email,
@@ -63,15 +99,28 @@ class ServicoEmprestimo:
             devolucao
         )
 
+        self.notificar(
+            email,
+            (
+                "Empréstimo registrado"
+            )
+        )
+
         return True
 
-    def registrar_devolucao(self, id):
+    def registrar_devolucao(
+        self,
+        id
+    ):
 
         for emprestimo in (
             self.repo.buscar_emprestimos()
         ):
 
-            if emprestimo.id == id:
+            if (
+                emprestimo.id
+                == id
+            ):
 
                 emprestimo.devolvido = True
 
@@ -83,17 +132,22 @@ class ServicoEmprestimo:
 
         return False
 
-    def calcular_multa(self, emprestimo):
+    def calcular_multa(
+        self,
+        emprestimo
+    ):
 
         dias_atraso = (
             date.today()
             - emprestimo.data_devolucao
         ).days
 
-        return calcular_multa_com_carencia(
-            dias_atraso=dias_atraso,
-            carencia=3,
-            valor_por_dia=10
+        return (
+            calcular_multa_com_carencia(
+                dias_atraso=dias_atraso,
+                carencia=3,
+                valor_por_dia=10
+            )
         )
 
     def listar_atrasados(self):
@@ -107,7 +161,9 @@ class ServicoEmprestimo:
             if (
                 emprestimo.data_devolucao
                 < date.today()
-                and not emprestimo.devolvido
+                and not (
+                    emprestimo.devolvido
+                )
             ):
 
                 emprestimo.multa = (
@@ -116,10 +172,17 @@ class ServicoEmprestimo:
                     )
                 )
 
-                atrasados.append(emprestimo)
+                atrasados.append(
+                    emprestimo
+                )
 
                 self.notificador.notificar_atraso(
                     emprestimo.email
+                )
+
+                self.notificar(
+                    emprestimo.email,
+                    "Empréstimo atrasado"
                 )
 
         return atrasados

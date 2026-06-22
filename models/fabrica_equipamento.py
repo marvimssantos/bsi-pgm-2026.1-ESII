@@ -1,40 +1,26 @@
-from models.equipamento import (
-    Equipamento,
-    Notebook,
-    Projetor,
-    Cabo
-)
+from models.equipamento import Notebook, Projetor, Cabo
+from models.multa_strategy import MultaPorDia
 
 
 class FabricaEquipamento:
 
-    _registro = {
-        "notebook": Notebook,
-        "projetor": Projetor,
-        "cabo": Cabo
+    _config = {
+        "notebook": (Notebook, MultaPorDia(10.0)),
+        "projetor": (Projetor, MultaPorDia(5.0)),
+        "cabo": (Cabo, MultaPorDia(2.0)),
     }
 
     @classmethod
-    def criar(
-        cls,
-        tipo,
-        id,
-        nome
-    ) -> Equipamento:
+    def criar(cls, tipo, id, nome):
 
-        classe = (
-            cls._registro.get(
-                tipo
-            )
-        )
+        if tipo not in cls._config:
+            raise ValueError("Tipo inválido")
 
-        if classe is None:
-
-            raise ValueError(
-                f"Tipo desconhecido: {tipo}"
-            )
+        classe, estrategia = cls._config[tipo]
 
         return classe(
-            id=id,
-            nome=nome
+            id,
+            nome,
+            tipo,
+            estrategia,
         )

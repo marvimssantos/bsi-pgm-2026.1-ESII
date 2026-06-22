@@ -1,51 +1,60 @@
 import pytest
 
-from models.equipamento import Notebook, Projetor
+from models.equipamento import Notebook, Projetor, Cabo
+from models.multa_strategy import MultaPorDia
 
 
 @pytest.mark.parametrize(
-    "equipamento,dias,multa_esperada",
+    "equipamento,dias,esperado",
     [
-        (Notebook(1, "Notebook", True), 1, 10),
-        (Notebook(1, "Notebook", True), 3, 30),
-        (Projetor(2, "Projetor", True), 1, 5),
-        (Projetor(2, "Projetor", True), 4, 20),
-    ]
+        (
+            Notebook(1, "Notebook", "notebook", MultaPorDia(10.0)),
+            1,
+            10,
+        ),
+        (
+            Notebook(1, "Notebook", "notebook", MultaPorDia(10.0)),
+            3,
+            30,
+        ),
+        (
+            Projetor(2, "Projetor", "projetor", MultaPorDia(5.0)),
+            1,
+            5,
+        ),
+        (
+            Cabo(3, "Cabo", "cabo", MultaPorDia(2.0)),
+            4,
+            8,
+        ),
+    ],
 )
 def test_calcular_multa_atraso_positivo(
     equipamento,
     dias,
-    multa_esperada
+    esperado,
 ):
-
-    # Arrange
-
-    # Act
-    multa = equipamento.calcular_multa(
-        dias
-    )
-
-    # Assert
-    assert multa == multa_esperada
+    assert equipamento.calcular_multa(dias) == esperado
 
 
 @pytest.mark.parametrize(
     "equipamento",
     [
-        Notebook(1, "Notebook", True),
-        Projetor(2, "Projetor", True)
-    ]
+        Notebook(
+            1,
+            "Notebook",
+            "notebook",
+            MultaPorDia(10.0),
+        ),
+        Projetor(
+            2,
+            "Projetor",
+            "projetor",
+            MultaPorDia(5.0),
+        ),
+    ],
 )
 def test_calcular_multa_atraso_negativo_retorna_zero(
-    equipamento
+    equipamento,
 ):
-
-    # Arrange
-
-    # Act
-    multa = equipamento.calcular_multa(
-        -5
-    )
-
-    # Assert
-    assert multa == 0
+    assert equipamento.calcular_multa(-10) == 0

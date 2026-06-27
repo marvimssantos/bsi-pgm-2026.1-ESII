@@ -77,3 +77,7 @@ Já o padrão Observer foi utilizado para desacoplar o envio de notificações d
 Comparando com as aulas anteriores, foi possível perceber que refatorações orientadas por padrões aumentam reutilização e manutenção do código. Além disso, os testes automatizados deram segurança para modificar estruturas internas sem alterar o comportamento esperado do sistema.
 
 A principal lição observada foi que padrões de projeto devem ser aplicados para resolver problemas reais de organização e evolução do código, e não apenas para aumentar complexidade.
+
+## Aula 12
+
+Durante a atividade foi realizado um diagnóstico de possíveis code smells presentes no sistema e aplicado refactoring sem alterar comportamento. O principal ajuste foi substituir eventos representados por dados soltos por um objeto dedicado, aumentando coesão e legibilidade. Também foram aplicadas técnicas de Rename e Extract Function para reduzir responsabilidades e melhorar manutenção. Os testes permaneceram verdes durante todo o processo.

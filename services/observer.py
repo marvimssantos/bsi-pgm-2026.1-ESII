@@ -1,10 +1,15 @@
 from abc import ABC, abstractmethod
 
+from models.evento import Evento
+
 
 class Observer(ABC):
 
     @abstractmethod
-    def atualizar(self, email, mensagem):
+    def atualizar(
+        self,
+        evento: Evento
+    ):
         pass
 
 
@@ -12,10 +17,11 @@ class NotificadorEmail(Observer):
 
     def atualizar(
         self,
-        email,
-        mensagem
+        evento: Evento
     ):
 
         print(
-            f"[EMAIL] {email}: {mensagem}"
+            f"[EMAIL] "
+            f"{evento.email}: "
+            f"{evento.mensagem}"
         )

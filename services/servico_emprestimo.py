@@ -1,14 +1,26 @@
 # ServicoEmprestimo: controlar regras de empréstimo.
 
-from datetime import date, timedelta
+from datetime import (
+    date,
+    timedelta
+)
 
-from models.emprestimo import Emprestimo
+from models.emprestimo import (
+    Emprestimo
+)
+
+from models.evento import (
+    Evento
+)
+
 from repositories.interfaces import (
     IRepositorioEmprestimo
 )
+
 from services.interfaces import (
     INotificador
 )
+
 from multa import (
     calcular_multa_com_carencia
 )
@@ -35,17 +47,21 @@ class ServicoEmprestimo:
             observer
         )
 
-    def notificar(
+    def emitir_evento(
         self,
         email,
         mensagem
     ):
 
+        evento = Evento(
+            email=email,
+            mensagem=mensagem
+        )
+
         for observer in self.observers:
 
             observer.atualizar(
-                email,
-                mensagem
+                evento
             )
 
     def registrar(
@@ -99,11 +115,9 @@ class ServicoEmprestimo:
             devolucao
         )
 
-        self.notificar(
+        self.emitir_evento(
             email,
-            (
-                "Empréstimo registrado"
-            )
+            "Empréstimo registrado"
         )
 
         return True
@@ -161,9 +175,7 @@ class ServicoEmprestimo:
             if (
                 emprestimo.data_devolucao
                 < date.today()
-                and not (
-                    emprestimo.devolvido
-                )
+                and not emprestimo.devolvido
             ):
 
                 emprestimo.multa = (
@@ -180,7 +192,7 @@ class ServicoEmprestimo:
                     emprestimo.email
                 )
 
-                self.notificar(
+                self.emitir_evento(
                     emprestimo.email,
                     "Empréstimo atrasado"
                 )

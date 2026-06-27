@@ -64,6 +64,27 @@ class ServicoEmprestimo:
                 evento
             )
 
+    def criar_emprestimo(
+        self,
+        equip_id,
+        nome,
+        email,
+        devolucao
+    ):
+
+        return Emprestimo(
+            id=(
+                len(
+                    self.repo.emprestimos
+                ) + 1
+            ),
+            equipamento_id=equip_id,
+            nome_usuario=nome,
+            email=email,
+            data_devolucao=devolucao,
+            devolvido=False
+        )
+
     def registrar(
         self,
         equip_id,
@@ -78,10 +99,10 @@ class ServicoEmprestimo:
             )
         )
 
-        if equipamento is None:
-            return False
-
-        if not equipamento.disponivel:
+        if (
+            equipamento is None
+            or not equipamento.disponivel
+        ):
             return False
 
         devolucao = (
@@ -89,17 +110,13 @@ class ServicoEmprestimo:
             + timedelta(days=dias)
         )
 
-        emprestimo = Emprestimo(
-            id=(
-                len(
-                    self.repo.emprestimos
-                ) + 1
-            ),
-            equipamento_id=equip_id,
-            nome_usuario=nome,
-            email=email,
-            data_devolucao=devolucao,
-            devolvido=False
+        emprestimo = (
+            self.criar_emprestimo(
+                equip_id,
+                nome,
+                email,
+                devolucao
+            )
         )
 
         self.repo.salvar_emprestimo(
@@ -166,7 +183,7 @@ class ServicoEmprestimo:
 
     def listar_atrasados(self):
 
-        atrasados = []
+        emprestimos_atrasados = []
 
         for emprestimo in (
             self.repo.buscar_emprestimos()
@@ -184,7 +201,7 @@ class ServicoEmprestimo:
                     )
                 )
 
-                atrasados.append(
+                emprestimos_atrasados.append(
                     emprestimo
                 )
 
@@ -197,4 +214,4 @@ class ServicoEmprestimo:
                     "Empréstimo atrasado"
                 )
 
-        return atrasados
+        return emprestimos_atrasados

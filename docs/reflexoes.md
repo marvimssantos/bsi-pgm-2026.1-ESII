@@ -80,4 +80,8 @@ A principal lição observada foi que padrões de projeto devem ser aplicados pa
 
 ## Aula 12
 
-Durante a atividade foi realizado um diagnóstico de possíveis code smells presentes no sistema e aplicado refactoring sem alterar comportamento. O principal ajuste foi substituir eventos representados por dados soltos por um objeto dedicado, aumentando coesão e legibilidade. Também foram aplicadas técnicas de Rename e Extract Function para reduzir responsabilidades e melhorar manutenção. Os testes permaneceram verdes durante todo o processo.
+Durante a atividade foi realizado um diagnóstico de possíveis code smells presentes no sistema e aplicado refactoring sem alterar o comportamento observável da aplicação. O principal ajuste foi substituir eventos representados por estruturas genéricas por um objeto dedicado `Evento` utilizando `@dataclass`, aumentando coesão, legibilidade e reduzindo dependência de chaves literais.
+
+Também foram aplicadas técnicas de Rename e Extract Function para melhorar nomes, separar responsabilidades e facilitar manutenção futura do código. Um ponto importante foi identificar que nem todo indício encontrado representava necessariamente um problema real, registrando também um falso positivo no diagnóstico para justificar a decisão de não refatorar determinadas partes.
+
+Os testes automatizados tiveram papel de rede de segurança durante todo o processo. Após cada refactoring a suíte foi executada com `pytest`, garantindo que as alterações estruturais não modificassem o comportamento esperado do sistema. Além disso, foi validado o funcionamento manual com `python main.py`, mantendo a mesma experiência observada na aula anterior.

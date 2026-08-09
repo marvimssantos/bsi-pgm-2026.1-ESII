@@ -9,7 +9,7 @@ def test_multa_zero_quando_sem_atraso():
         valor_por_dia=10
     )
 
-    assert resultado == 99.0
+    assert resultado == 0.0
 
 
 def test_multa_apos_carencia():
@@ -31,4 +31,4 @@ def test_multa_nunca_negativa():
         valor_por_dia=10
     )
 
-    assert resultado == 99.0
+    assert resultado == 0.0

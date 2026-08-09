@@ -1,29 +1,12 @@
 # ServicoEmprestimo: controlar regras de empréstimo.
 
-from datetime import (
-    date,
-    timedelta
-)
+from datetime import date, timedelta
 
-from models.emprestimo import (
-    Emprestimo
-)
-
-from models.evento import (
-    Evento
-)
-
-from repositories.interfaces import (
-    IRepositorioEmprestimo
-)
-
-from services.interfaces import (
-    INotificador
-)
-
-from multa import (
-    calcular_multa_com_carencia
-)
+from models.emprestimo import Emprestimo
+from models.evento import Evento
+from multa import calcular_multa_com_carencia
+from repositories.interfaces import IRepositorioEmprestimo
+from services.interfaces import INotificador
 
 
 class ServicoEmprestimo:

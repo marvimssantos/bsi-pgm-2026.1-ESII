@@ -1,8 +1,8 @@
 import pytest
 
-from tests.fakes.fake_repositorio import FakeRepositorio
-from tests.fakes.fake_notificador import FakeNotificador
 from services.servico_emprestimo import ServicoEmprestimo
+from tests.fakes.fake_notificador import FakeNotificador
+from tests.fakes.fake_repositorio import FakeRepositorio
 
 
 @pytest.fixture

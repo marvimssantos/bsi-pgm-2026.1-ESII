@@ -1,6 +1,6 @@
 import pytest
 
-from models.equipamento import Notebook, Projetor, Cabo
+from models.equipamento import Cabo, Notebook, Projetor
 from models.multa_strategy import MultaPorDia
 
 

@@ -1,14 +1,6 @@
-from repositories.repositorio_emprestimo import (
-    RepositorioEmprestimo
-)
-
-from services.notificador import (
-    Notificador
-)
-
-from services.servico_emprestimo import (
-    ServicoEmprestimo
-)
+from repositories.repositorio_emprestimo import RepositorioEmprestimo
+from services.notificador import Notificador
+from services.servico_emprestimo import ServicoEmprestimo
 
 
 class SistemaDeEmprestimos:

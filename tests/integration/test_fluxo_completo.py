@@ -1,14 +1,5 @@
-from services.servico_emprestimo import (
-    ServicoEmprestimo
-)
-
-from tests.fakes.fake_repositorio import (
-    FakeRepositorio
-)
-
-from tests.fakes.fake_notificador import (
-    FakeNotificador
-)
+from tests.fakes.fake_notificador import FakeNotificador
+from tests.fakes.fake_repositorio import FakeRepositorio
 
 
 def test_integracao_servico_repo_notificador():
@@ -17,11 +8,6 @@ def test_integracao_servico_repo_notificador():
     repo = FakeRepositorio()
 
     notificador = FakeNotificador()
-
-    servico = ServicoEmprestimo(
-        repo,
-        notificador
-    )
 
     emprestimo = {
         "id": 1,

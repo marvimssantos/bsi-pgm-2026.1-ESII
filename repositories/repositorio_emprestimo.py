@@ -1,10 +1,5 @@
-from models.fabrica_equipamento import (
-    FabricaEquipamento
-)
-
-from repositories.interfaces import (
-    IRepositorioEmprestimo
-)
+from models.fabrica_equipamento import FabricaEquipamento
+from repositories.interfaces import IRepositorioEmprestimo
 
 
 class RepositorioEmprestimo(

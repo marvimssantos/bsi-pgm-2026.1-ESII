@@ -1,15 +1,12 @@
 name: CI
 
-on:
-  [push, pull_request]
+on: [push, pull_request]
 
 jobs:
-  test:
-
+  qualidade:
     runs-on: ubuntu-latest
 
     steps:
-
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
@@ -17,9 +14,10 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements-dev.txt
+        run: pip install -r requirements-dev.txt
 
-      - name: Run tests with coverage
-        run: |
-          pytest --cov=. --cov-report=term-missing
+      - name: Lint
+        run: ruff check .
+
+      - name: Tests coverage gate
+        run: pytest --cov=. --cov-report=term-missing --cov-fail-under=80
